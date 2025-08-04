@@ -1,0 +1,89 @@
+﻿@model IEnumerable<YapilacaklarListesi.Models.YapilacakGorev>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern To-Do List</title>
+    <link rel="stylesheet" href="/YapilacaklarListesiTemplate/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <style>
+        .task-item.important {
+            background-color: #fff8dc;
+            border-left: 5px solid gold;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+
+    </style>
+    <div class="container">
+        <main class="main-content">
+            <header>
+                <div class="header-content">
+                    <h1>Yapılacaklar Listesi</h1>
+                    <div class="user-info">
+                        <div class="task-stats">
+                            <span class="completed">@Model.Count(x=>x.Tamamlandi) Tamamlandı</span>
+                            <span class="pending">@Model.Count(x=>!x.Tamamlandi) Bekliyor</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <form method="post" class="add-task" asp-controller="Gorev" asp-action="Ekle">
+                <input type="text" id="newTask" name="Baslik" placeholder="Yeni görev ekle...">
+                <input type="text" id="newTask" name="Aciklama" placeholder="Açıklama (Opsiyonel)">
+                <button id="addTaskBtn" type="submit">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </form>
+
+            <div class="task-list">
+                @foreach(var gorev in Model){
+                    <div class="task-item @(gorev.Tamamlandi ? "completed" : "") @(gorev.Onemli ? "important" : "")">
+                    <div class="task-check">
+                        <form asp-controller="Gorev" asp-action="Tamamla" method="post" style="display: inline">
+                                <input type="hidden" name="ID" value="@gorev.ID">
+                                <input type="checkbox" id="gorev_@gorev.ID" @(gorev.Tamamlandi ? "checked" : "") onchange="this.form.submit()">
+                                <label for="gorev_@gorev.ID"></label>
+                        </form>
+                       
+                    </div>
+                    <div class="task-content">
+                        <h3>@gorev.Baslik</h3>
+                        @if(!string.IsNullOrEmpty(gorev.Aciklama)){
+ <p>@gorev.Aciklama</p>
+                        }
+                       
+                    </div>
+                    <div class="task-actions">
+                        <form asp-controller="Gorev" asp-action="OnemliYap" method="post" style="display:inline;">
+                            <input type="hidden" name="ID" value="@gorev.ID" />
+                              <button type="submit" class="important-btn">
+                                  <i class="@(gorev.Onemli ? "fas" : "far") fa-star"></i>
+                              </button>
+                        </form>
+                            <form asp-controller="Gorev" asp-action="Sil" method="post" style="display:inline;">
+                                <input type="hidden" name="ID" value="@gorev.ID" />
+                                <button type="submit" class="delete-btn" onclick="return confirm('Bu görevi silmek istediğinizden emin misiniz?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+
+                            </form>
+                    </div>
+                </div>
+                
+               
+              }
+            </div>
+        </main>
+    </div>
+
+    <script src="/YapilacaklarListesiTemplate/js/main.js"></script>
+</body>
+</html>
