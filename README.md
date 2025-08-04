@@ -16,6 +16,8 @@ Bu uygulama, kullanıcıların günlük görevlerini organize etmelerine, takip 
 - 📊 **İstatistikler**: Tamamlanan ve bekleyen görev sayıları
 - 🎨 **Modern UI**: Responsive ve kullanıcı dostu arayüz
 
+<img width="1893" height="942" alt="Image" src="https://github.com/user-attachments/assets/10b7d4d0-04b8-4f35-8702-59e27dd09a01" />
+
 ## 🛠️ Kullanılan Teknolojiler
 
 ### Backend Teknolojileri
@@ -31,28 +33,6 @@ Bu uygulama, kullanıcıların günlük görevlerini organize etmelerine, takip 
 - **View**: Kullanıcı arayüzü
 - **Controller**: İş mantığı ve veri akışı
 
-## 📁 Proje Yapısı
-
-```
-To-DoListApp/
-├── Controllers/          # MVC Controller'ları
-│   ├── HomeController.cs
-│   └── GorevController.cs
-├── Models/              # Veri modelleri
-│   ├── Context.cs       # DbContext
-│   ├── YapilacakGorev.cs
-│   └── ErrorViewModel.cs
-├── Views/               # Razor view'ları
-│   ├── Home/
-│   ├── Gorev/
-│   └── Shared/
-├── Migrations/          # Entity Framework migrations
-├── wwwroot/            # Statik dosyalar
-│   ├── css/
-│   ├── js/
-│   └── To-DoListAppTemplate/
-└── Properties/          # Proje ayarları
-```
 
 ## 📄 Lisans
 
